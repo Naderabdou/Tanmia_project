@@ -25,4 +25,11 @@ Route::middleware([
 
 });
 
+Route::fallback(function(){
+    return view("welcome");
+});
+//Route::get("/{url?}", function(){
+//    return view("welcome");
+//})->where('url', "..*");
+
 
