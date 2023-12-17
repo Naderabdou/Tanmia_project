@@ -143,4 +143,14 @@ return [
 'admin'=>'מנהל',
     'logout'=>'התנתק',
     'videos'=>'סרטונים',
+    'saturday'=>'יום שבת',
+    'sunday'=>'יום ראשון',
+    'monday'=>'יום שני',
+    'tuesday'=>'יום שלישי',
+    'wednesday'=>'יום רביעי',
+    'thursday'=>'יום חמישי',
+    'friday'=>'יום שישי',
+
+    'total_users'=>'סך הכל משתמשים',
+    'user_chart'=>'סטטיסטיקת משתמשים',
     ];

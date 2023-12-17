@@ -49,25 +49,46 @@ newspaper
 
                 </div>
             </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="d-flex justify-content-between">
+                            <h4>@lang('general.news_chart')</h4>
 
-            <div class="d-flex justify-content-between">
-                <h4>@lang('general.news_chart')</h4>
+                            <select id="movies-chart-year" style="width: 100px;">
+                                @for ($i = 5; $i >=0 ; $i--)
+                                    <option value="{{ now()->subYears($i)->year }}"
+                                        {{ now()->subYears($i)->year == now()->year ? 'selected' : '' }}
+                                    >
+                                        {{ now()->subYears($i)->year }}
+                                    </option>
+                                @endfor
+                            </select>
+                        </div>
 
-                <select id="movies-chart-year" style="width: 100px;">
-                    @for ($i = 5; $i >=0 ; $i--)
-                        <option value="{{ now()->subYears($i)->year }}"
-                            {{ now()->subYears($i)->year == now()->year ? 'selected' : '' }}
-                        >
-                            {{ now()->subYears($i)->year }}
-                        </option>
-                    @endfor
-                </select>
+                        <div id="movies-chart-wrapper">
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex justify-content-between">
+                            <h4>@lang('general.user_chart')</h4>
+
+                            <input type="date" name="week" value="{{ now()->format('Y-m-d')}}">
+
+
+                        </div>
+
+                        <div id="user-chart-wrapper">
+
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
-            <div id="movies-chart-wrapper">
-
-
-            </div>
 
         </main>
         <!-- partial:partials/_footer.html -->
@@ -80,6 +101,7 @@ newspaper
 
                 topStatistics();
                 Movieschart("{{ now()->year }}")
+                Userschart("{{ now()->format('Y-m-d') }}")
 
 
 
@@ -92,6 +114,11 @@ newspaper
 
                 });
 
+
+                $('input[name="week"]').on('change', function () {
+                      var date = $(this).val();
+                    Userschart(date);
+                })
 
 
 
@@ -141,6 +168,30 @@ newspaper
                     //dataType: "html",
                     success: function (data) {
                         $('#movies-chart-wrapper').empty().append(data);
+                    }
+                });
+            }
+
+            function Userschart(date) {
+                let loader = `
+                        <div class="d-flex justify-content-center align-items-center">
+                        <div class="loader loader-md"></div>
+                        </div>
+                            `;
+
+                $('#user-chart-wrapper').empty().append(loader);
+                $.ajax({
+                    url: "{{ route('admin.users_chart') }}",
+                    type: "GET",
+                    data: {
+                        day: date
+                    },
+                    cache: false,
+
+                    //dataType: "html",
+                    success: function (data) {
+                        console.log(data);
+                        $('#user-chart-wrapper').empty().append(data);
                     }
                 });
             }

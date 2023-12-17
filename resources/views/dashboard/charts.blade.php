@@ -5,6 +5,7 @@
                 @foreach ($news as $data)
             {
 
+
                 ym: "{{ $data->year }}-{{ $data->month }}", b: "{{ $data->total_news }}"
             },
             @endforeach

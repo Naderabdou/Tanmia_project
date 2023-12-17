@@ -10,13 +10,19 @@ class VisitorController extends Controller
 {
     public function store(Request $request)
     {
-        if (Visitor::where('visitor', $request->ip())->exists()) {
-            return response()->json(['status' => false, 'message' => 'visitor already exists']);
+
+        if (Visitor::whereCreatedAt(date('Y-m-d'))->exists()) {
+            $visitor = Visitor::whereCreatedAt(date('Y-m-d'))->first();
+          $visitor->increment('count');
+        } else {
+            Visitor::create([
+                'count' => 1,
+                'created_at' => date('Y-m-d')
+            ]);
+
         }
-        $ip = $request->ip();
-        $visitor = Visitor::firstOrCreate(['visitor' => $ip]);
-        $visitor->increment('view');
-        $visitor->save();
+
+
 
         return response()->json(['status' => true, 'message' => 'visitor added successfully']);
     }

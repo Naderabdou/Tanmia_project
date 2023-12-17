@@ -34,6 +34,7 @@ Route::group(
         Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
             Route::get('/dashboard/news_chart', [DashboardController::class,'newsChart'])->name('news_chart');
+            Route::get('/dashboard/user_chart', [DashboardController::class,'userChart'])->name('users_chart');
             Route::get('/dashboard/count', [DashboardController::class,'count'])->name('count');
 
 

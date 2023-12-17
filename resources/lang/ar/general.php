@@ -150,6 +150,15 @@ return [
     'admins'=>'المشرف',
     'password_confirmation'=>'تأكيد كلمة المرور',
     'videos'=>'الفيديوهات',
+    'saturday'=>'السبت',
+    'sunday'=>'الاحد',
+    'monday'=>'الاثنين',
+    'tuesday'=>'الثلاثاء',
+    'wednesday'=>'الاربعاء',
+    'thursday'=>'الخميس',
+    'friday'=>'الجمعة',
+    'total_users'=>'اجمالي المستخدمين',
+    'user_chart'=>'احصائيات المستخدمين',
 
 
 

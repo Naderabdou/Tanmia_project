@@ -141,6 +141,14 @@ return [
     'admin'=>'Admin',
     'logout'=>'Logout',
     'videos'=>'Videos',
-
+    'saturday'=>'saturday',
+    'sunday'=>'Sunday',
+    'monday'=>'Monday',
+    'tuesday'=>'Tuesday',
+    'wednesday'=>'Wednesday',
+    'thursday'=>'Thursday',
+    'friday'=>'Friday',
+'total_users'=>'Total Users',
+    'user_chart'=>'User Chart',
 
 ];

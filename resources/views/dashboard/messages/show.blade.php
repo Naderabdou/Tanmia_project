@@ -114,7 +114,7 @@
 
 
 
-                                                                    <div style="text-align: @if(app()->getLocale() === 'ar' ) right @elseif(app()->getLocale() === "he") right @else left @endif" class="form-input col-md-12">
+                                                                    <div style="text-align: @if(app()->getLocale() === 'ar' ) right @elseif(app()->getLocale() === "he") right @else left @endif" class="form-input col-md-12 message-show">
                                                                         <label class="col-form-label" for="exampleFormControlTextarea1">@lang('general.message')</label>
                                                                         <textarea  style="border: #c3a962 2px solid;border-radius: 20px" name="replay"  class="form-control"  rows="3"></textarea>
 
@@ -122,6 +122,7 @@
 
 
                                                                     </div>
+                                                                    <div class="form-group col-md-12" id="message-show-loading"></div>
 
                                                                 </div>
 
@@ -177,11 +178,21 @@
 
 
             $(document).on('submit','#form_update_messages',function (e){
+
+                $(".print-error-msg_edit").find("ul").html('');
+                $(".print-error-msg_edit").css('display','none');
                 e.preventDefault();
+                let loader = `
+                        <div class="d-flex justify-content-center align-items-center">
+                        <div class="loader loader-md"></div>
+                        </div>
+                            `;
+
 
                 let url = $(this).attr('action');
                 let formData = new FormData($('#form_update_messages')[0]);
-                console.log(url);
+                $('#message-show-loading').empty().html(loader);
+
 
 
 
@@ -195,6 +206,9 @@
                     processData: false,
                     contentType: false,
                     success: function (response) {
+                        $(".print-error-msg_edit").find("ul").html('');
+                        $(".print-error-msg_edit").css('display','none');
+                        $('#message-show-loading').empty()
                         $('#status').text('@lang('general.replied')');
                         $('#status').removeClass('badge-danger');
                         $('#status').addClass('badge-success');
@@ -218,7 +232,7 @@
                         }).show();
                     },
                     error: function (error) {
-
+                        $('#message-show-loading').empty()
 
                         $(".print-error-msg_edit").find("ul").html('');
                         $(".print-error-msg_edit").css('display','block');

@@ -13,13 +13,6 @@ class DashboardController extends Controller
 {
    public function index(){
 
-
-
-
-
-
-
-
        return view('dashboard.index');
    }
 
@@ -27,7 +20,15 @@ class DashboardController extends Controller
     {
         $categoryCount = number_format(Category::count());
         $newsCount = number_format(News::count());
-        $userCount = number_format(Visitor::count());
+        $visitor= Visitor::select('count')->get();
+        //plus count to count
+        $sum = 0;
+        foreach ($visitor as $item) {
+
+            $sum += $item->count;
+        }
+
+        $userCount = number_format($sum);
 
 
         return response()->json([
@@ -54,4 +55,26 @@ class DashboardController extends Controller
         return view('dashboard.charts', compact('news'));
 
     }// end of moviesChart
+
+    public function userChart(){
+//day
+
+       ;
+        $users = Visitor::whereCreatedAt(request()->day)
+            ->select(
+                '*',
+                DB::raw('DAY(created_at) as day'),
+                DB::raw('MONTH(created_at) as month'),
+                DB::raw('YEAR(created_at) as year'),
+                DB::raw('COUNT(count) as total_users'),
+            )
+            ->groupBy('day')->get();
+
+
+
+
+        return view('dashboard.chartsUsers', compact('users'));
+
+    }// end of moviesChart
+
 }

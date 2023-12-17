@@ -320,10 +320,10 @@
                 success: function (response) {
                     $('#loading-contactUs').empty();
 
-                    $('.add-contact').css('display','none');
+                    $('.add-contact').css('display','block');
                     $("#create_contactUs").modal("hide");
                     $(".print-error-msg").find("ul").html('');
-                    $(".print-error-msg").css('display','block');
+                    $(".print-error-msg").css('display','none');
                     // $('#create_category').modal('hide');
                     $('#form_create_contactUs')[0].reset();
                     rolesTable.draw();

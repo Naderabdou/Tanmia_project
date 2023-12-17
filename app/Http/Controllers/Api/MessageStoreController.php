@@ -25,6 +25,7 @@ class MessageStoreController extends Controller
          $message = Message::create($data);
          $time = $message->created_at->diffForHumans();
 
+
          event(new sent_message($message->message, $message->name,$time, $message->id));
        User::find(1)->notify(new UserMessage($message->name, $message->message, $message->id));
 
